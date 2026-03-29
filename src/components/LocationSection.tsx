@@ -15,36 +15,54 @@ const LocationSection = () => {
           <p className="text-muted-foreground text-sm">Perfectly positioned near Rajnandgaon Railway Station</p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          <div className="bg-card border border-border rounded-xl p-6">
-            <div className="flex items-start gap-3 mb-6">
-              <MapPin className="w-5 h-5 text-primary mt-0.5" />
-              <div>
-                <h3 className="font-heading text-lg font-semibold text-foreground mb-1">Address</h3>
-                <p className="text-sm text-muted-foreground">
-                  Hotel Mayur, Near Railway Station, Rajnandgaon, Chhattisgarh 491441
-                </p>
-              </div>
-            </div>
-
-            <div className="space-y-4 mb-6">
-              {[
-                { name: "Raj Nandgaon Railway Station", distance: "4 min walk" },
-                { name: "Jatkanhar Railway Station", distance: "37.2 km" },
-              ].map((point) => (
-                <div key={point.name} className="flex items-center gap-3 text-sm">
-                  <Train className="w-4 h-4 text-primary" />
-                  <span className="text-foreground">{point.name}</span>
-                  <span className="text-muted-foreground ml-auto">{point.distance}</span>
+        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          {/* Left column: Info + Map */}
+          <div className="space-y-6">
+            <div className="bg-card border border-border rounded-xl p-6">
+              <div className="flex items-start gap-3 mb-6">
+                <MapPin className="w-5 h-5 text-primary mt-0.5" />
+                <div>
+                  <h3 className="font-heading text-lg font-semibold text-foreground mb-1">Address</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Hotel Mayur, Near Railway Station, Rajnandgaon, Chhattisgarh 491441
+                  </p>
                 </div>
-              ))}
+              </div>
+
+              <div className="space-y-4 mb-6">
+                {[
+                  { name: "Raj Nandgaon Railway Station", distance: "4 min walk" },
+                  { name: "Jatkanhar Railway Station", distance: "37.2 km" },
+                ].map((point) => (
+                  <div key={point.name} className="flex items-center gap-3 text-sm">
+                    <Train className="w-4 h-4 text-primary" />
+                    <span className="text-foreground">{point.name}</span>
+                    <span className="text-muted-foreground ml-auto">{point.distance}</span>
+                  </div>
+                ))}
+              </div>
+
+              <a href="tel:+919752895362" className="flex items-center gap-2 text-sm text-primary hover:underline font-medium">
+                <Phone className="w-4 h-4" /> Call: +91 97528-95362
+              </a>
             </div>
 
-            <a href="tel:+919752895362" className="flex items-center gap-2 text-sm text-primary hover:underline font-medium">
-              <Phone className="w-4 h-4" /> Call: +91 97528-95362
-            </a>
+            {/* Google Maps Embed */}
+            <div className="rounded-xl overflow-hidden border border-border h-[250px]">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3726.847!2d81.0289!3d21.0969!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a2880dacd3d5c5f%3A0x1234567890abcdef!2sHotel%20Mayur%2C%20Near%20Railway%20Station%2C%20Rajnandgaon%2C%20Chhattisgarh%20491441!5e0!3m2!1sen!2sin!4v1700000000000"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Hotel Mayur Location"
+              />
+            </div>
           </div>
 
+          {/* Right column: Rules */}
           <div className="bg-card border border-border rounded-xl p-6">
             <h3 className="font-heading text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
               <Clock className="w-5 h-5 text-primary" />
