@@ -25,7 +25,7 @@ const RoomCard = ({ room, index }: { room: Room; index: number }) => {
     >
       <Link
         to={`/rooms/${room.slug}`}
-        className="group block bg-card rounded overflow-hidden border border-border hover:border-gold transition-colors glow-gold"
+        className="group block bg-card rounded-xl overflow-hidden border border-border hover:border-primary/30 transition-all hover:shadow-lg"
       >
         <div className="relative overflow-hidden aspect-[16/10]">
           <img
@@ -36,7 +36,7 @@ const RoomCard = ({ room, index }: { room: Room; index: number }) => {
             height={720}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
           />
-          <div className="absolute top-3 right-3 bg-primary/90 text-primary-foreground text-xs font-semibold px-3 py-1 rounded">
+          <div className="absolute top-3 right-3 bg-primary text-primary-foreground text-xs font-semibold px-3 py-1 rounded-full">
             {Math.round(((room.originalPrice - room.price) / room.originalPrice) * 100)}% OFF
           </div>
         </div>

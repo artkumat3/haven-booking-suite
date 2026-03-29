@@ -22,7 +22,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-card/90 backdrop-blur-xl border-b border-border shadow-sm">
       <div className="container mx-auto flex items-center justify-between h-16 px-4">
         <Link to="/" className="flex items-center gap-2">
           <span className="font-heading text-xl font-semibold text-gold-gradient">Hotel Mayur</span>
@@ -35,7 +35,7 @@ const Navbar = () => {
               key={link.path}
               to={link.path}
               className={`text-sm font-body tracking-wide transition-colors hover:text-primary ${
-                location.pathname === link.path ? "text-primary" : "text-muted-foreground"
+                location.pathname === link.path ? "text-primary font-medium" : "text-muted-foreground"
               }`}
             >
               {link.label}
@@ -63,7 +63,7 @@ const Navbar = () => {
               </button>
             </>
           ) : (
-            <Link to="/login" className="text-sm bg-gold-gradient text-primary-foreground px-4 py-2 rounded hover:opacity-90 transition-opacity font-semibold">
+            <Link to="/login" className="text-sm bg-gold-gradient text-primary-foreground px-4 py-2 rounded-lg hover:opacity-90 transition-opacity font-semibold">
               Sign In
             </Link>
           )}
@@ -82,12 +82,12 @@ const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-background border-b border-border overflow-hidden"
+            className="md:hidden bg-card border-b border-border overflow-hidden"
           >
             <div className="px-4 py-4 flex flex-col gap-3">
               {navLinks.map((link) => (
                 <Link key={link.path} to={link.path} onClick={() => setOpen(false)}
-                  className={`text-sm py-2 transition-colors ${location.pathname === link.path ? "text-primary" : "text-muted-foreground"}`}>
+                  className={`text-sm py-2 transition-colors ${location.pathname === link.path ? "text-primary font-medium" : "text-muted-foreground"}`}>
                   {link.label}
                 </Link>
               ))}
@@ -98,7 +98,7 @@ const Navbar = () => {
                   <button onClick={handleSignOut} className="text-sm py-2 text-muted-foreground text-left flex items-center gap-1"><LogOut className="w-4 h-4" /> Sign Out</button>
                 </>
               ) : (
-                <Link to="/login" onClick={() => setOpen(false)} className="text-sm py-2 text-primary">Sign In</Link>
+                <Link to="/login" onClick={() => setOpen(false)} className="text-sm py-2 text-primary font-medium">Sign In</Link>
               )}
               <a href="tel:+919752895362" className="flex items-center gap-2 text-sm text-primary py-2">
                 <Phone className="w-4 h-4" /> +91 97528-95362

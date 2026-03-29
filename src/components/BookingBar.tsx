@@ -19,10 +19,10 @@ const BookingBar = () => {
   };
 
   return (
-    <div className="sticky top-16 z-40 bg-surface-elevated/95 backdrop-blur-xl border-b border-border">
+    <div className="sticky top-16 z-40 bg-card/95 backdrop-blur-xl border-b border-border shadow-sm">
       <div className="container mx-auto px-4 py-3">
         <div className="flex flex-col md:flex-row items-stretch md:items-center gap-3">
-          <div className="flex items-center gap-2 flex-1 bg-background rounded px-3 py-2">
+          <div className="flex items-center gap-2 flex-1 bg-muted rounded-lg px-3 py-2">
             <CalendarDays className="w-4 h-4 text-primary shrink-0" />
             <div className="flex flex-col">
               <label className="text-[10px] uppercase tracking-wider text-muted-foreground">Check-in</label>
@@ -35,7 +35,7 @@ const BookingBar = () => {
             </div>
           </div>
 
-          <div className="flex items-center gap-2 flex-1 bg-background rounded px-3 py-2">
+          <div className="flex items-center gap-2 flex-1 bg-muted rounded-lg px-3 py-2">
             <CalendarDays className="w-4 h-4 text-primary shrink-0" />
             <div className="flex flex-col">
               <label className="text-[10px] uppercase tracking-wider text-muted-foreground">Check-out</label>
@@ -48,7 +48,7 @@ const BookingBar = () => {
             </div>
           </div>
 
-          <div className="flex items-center gap-2 flex-1 bg-background rounded px-3 py-2">
+          <div className="flex items-center gap-2 flex-1 bg-muted rounded-lg px-3 py-2">
             <BedDouble className="w-4 h-4 text-primary shrink-0" />
             <div className="flex flex-col">
               <label className="text-[10px] uppercase tracking-wider text-muted-foreground">Room</label>
@@ -58,13 +58,13 @@ const BookingBar = () => {
                 className="bg-transparent text-sm text-foreground outline-none font-body"
               >
                 {roomCategories.map((c) => (
-                  <option key={c} value={c} className="bg-background">{c}</option>
+                  <option key={c} value={c}>{c}</option>
                 ))}
               </select>
             </div>
           </div>
 
-          <div className="flex items-center gap-2 flex-1 bg-background rounded px-3 py-2">
+          <div className="flex items-center gap-2 flex-1 bg-muted rounded-lg px-3 py-2">
             <Users className="w-4 h-4 text-primary shrink-0" />
             <div className="flex flex-col">
               <label className="text-[10px] uppercase tracking-wider text-muted-foreground">Guests</label>
@@ -74,7 +74,7 @@ const BookingBar = () => {
                 className="bg-transparent text-sm text-foreground outline-none font-body"
               >
                 {[1, 2, 3].map((n) => (
-                  <option key={n} value={n} className="bg-background">{n} Guest{n > 1 ? "s" : ""}</option>
+                  <option key={n} value={n}>{n} Guest{n > 1 ? "s" : ""}</option>
                 ))}
               </select>
             </div>
@@ -82,7 +82,7 @@ const BookingBar = () => {
 
           <button
             onClick={handleBook}
-            className="bg-gold-gradient text-primary-foreground font-body font-semibold text-sm px-8 py-3 rounded tracking-wide hover:opacity-90 transition-opacity whitespace-nowrap"
+            className="bg-gold-gradient text-primary-foreground font-body font-semibold text-sm px-8 py-3 rounded-lg tracking-wide hover:opacity-90 transition-opacity whitespace-nowrap"
           >
             BOOK NOW
           </button>

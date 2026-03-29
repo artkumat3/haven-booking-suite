@@ -1,15 +1,15 @@
 import { motion } from "framer-motion";
-import { Utensils, Car, CigaretteOff, Clock, Wifi, ConciergeBell, ShieldCheck, Umbrella } from "lucide-react";
+import { Utensils, Car, Cigarette, Clock, Wifi, ConciergeBell, ShieldCheck, Umbrella } from "lucide-react";
 
 const amenities = [
-  { icon: Utensils, label: "Restaurant" },
-  { icon: Car, label: "Free Parking" },
-  { icon: CigaretteOff, label: "Smoking Rooms" },
-  { icon: Clock, label: "24hr Housekeeping" },
-  { icon: Wifi, label: "Free Wi-Fi" },
-  { icon: ConciergeBell, label: "Room Service" },
-  { icon: ShieldCheck, label: "Security" },
-  { icon: Umbrella, label: "Umbrellas" },
+  { icon: Utensils, label: "Punkh Restaurant", desc: "Pure Veg Family Dining" },
+  { icon: Car, label: "Free Parking", desc: "On-site parking available" },
+  { icon: Cigarette, label: "Smoking Rooms", desc: "Designated smoking rooms" },
+  { icon: Clock, label: "24hr Housekeeping", desc: "Round-the-clock service" },
+  { icon: Wifi, label: "Free Wi-Fi", desc: "High-speed internet" },
+  { icon: ConciergeBell, label: "Room Service", desc: "In-room dining available" },
+  { icon: ShieldCheck, label: "Security", desc: "24/7 security on premises" },
+  { icon: Umbrella, label: "Umbrellas", desc: "Complimentary for guests" },
 ];
 
 const AmenitiesSection = () => {
@@ -28,7 +28,7 @@ const AmenitiesSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
           {amenities.map((a, i) => (
             <motion.div
               key={a.label}
@@ -36,10 +36,11 @@ const AmenitiesSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.08 }}
-              className="flex flex-col items-center gap-3 bg-card border border-border rounded p-6 hover:border-gold transition-colors"
+              className="flex flex-col items-center gap-2 bg-card border border-border rounded-xl p-6 hover:border-primary/30 hover:shadow-md transition-all text-center"
             >
               <a.icon className="w-6 h-6 text-primary" />
-              <span className="text-sm text-foreground font-body">{a.label}</span>
+              <span className="text-sm font-medium text-foreground font-body">{a.label}</span>
+              <span className="text-[11px] text-muted-foreground">{a.desc}</span>
             </motion.div>
           ))}
         </div>
