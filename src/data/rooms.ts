@@ -30,7 +30,7 @@ export const rooms: Room[] = [
     bedType: "Queen Bed",
     view: "City View",
     amenities: ["Free Wi-Fi", "Air Conditioning", "Flat-screen TV", "Mineral Water", "24-hour Housekeeping", "In-room Dining", "Bathroom with Hot Water", "Wardrobe"],
-    highlights: ["Free Cancellation", "Complimentary Breakfast"],
+    highlights: ["Complimentary Breakfast", "Instant Confirmation"],
   },
   {
     id: "deluxe",
@@ -46,7 +46,7 @@ export const rooms: Room[] = [
     bedType: "King Bed",
     view: "City View",
     amenities: ["Free Wi-Fi", "Air Conditioning", "Flat-screen TV", "Mini Bar", "Tea/Coffee Maker", "Mineral Water", "24-hour Housekeeping", "In-room Dining", "Premium Bathroom", "Sitting Area", "Wardrobe", "Work Desk"],
-    highlights: ["Free Cancellation", "Complimentary Breakfast", "Late Checkout"],
+    highlights: ["Complimentary Breakfast", "Late Checkout", "Instant Confirmation"],
   },
   {
     id: "executive",
@@ -62,7 +62,7 @@ export const rooms: Room[] = [
     bedType: "King Bed",
     view: "Panoramic View",
     amenities: ["Free Wi-Fi", "Air Conditioning", "55\" Smart TV", "Mini Bar", "Espresso Machine", "Mineral Water", "24-hour Housekeeping", "In-room Dining", "Premium Bathroom", "Executive Desk", "Lounge Chair", "Bathrobe & Slippers", "Iron & Board"],
-    highlights: ["Free Cancellation", "Complimentary Breakfast", "Late Checkout", "Airport Transfer"],
+    highlights: ["Complimentary Breakfast", "Late Checkout", "Airport Transfer", "Instant Confirmation"],
   },
   {
     id: "suite",
@@ -78,7 +78,7 @@ export const rooms: Room[] = [
     bedType: "1 King Bed",
     view: "City View",
     amenities: ["Free Wi-Fi", "Air Conditioning", "55\" Smart TV", "Mini Bar", "Espresso Machine", "Mineral Water", "24-hour Housekeeping", "In-room Dining", "Premium Bathroom", "Living Area", "Dining Area", "Bathrobe & Slippers", "Smoking Room", "Interconnected Room"],
-    highlights: ["Free Cancellation", "Complimentary Breakfast", "Late Checkout", "Airport Transfer", "Welcome Drinks"],
+    highlights: ["Complimentary Breakfast", "Late Checkout", "Airport Transfer", "Welcome Drinks", "Instant Confirmation"],
   },
 ];
 
