@@ -93,3 +93,8 @@
     box-shadow: 0 4px 20px -5px hsl(var(--gold) / 0.15);
   }
 }
+
+@media print {
+  nav, footer, .print\\:hidden { display: none !important; }
+  body { background: white !important; }
+}

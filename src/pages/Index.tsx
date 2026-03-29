@@ -5,6 +5,7 @@ import RoomCard from "@/components/RoomCard";
 import GallerySection from "@/components/GallerySection";
 import AmenitiesSection from "@/components/AmenitiesSection";
 import LocationSection from "@/components/LocationSection";
+import SpecialOffers from "@/components/SpecialOffers";
 import { rooms } from "@/data/rooms";
 import { motion } from "framer-motion";
 
@@ -42,6 +43,7 @@ const Index = () => {
         </div>
       </section>
 
+      <SpecialOffers />
       <GallerySection />
       <AmenitiesSection />
       <LocationSection />

@@ -6,12 +6,9 @@ import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Calendar } from "@/components/ui/calendar";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { CalendarIcon, Users, IndianRupee } from "lucide-react";
-import { format, differenceInDays } from "date-fns";
-import { cn } from "@/lib/utils";
+import { Users, IndianRupee } from "lucide-react";
+import { format, differenceInDays, addDays } from "date-fns";
 
 interface BookingModalProps {
   open: boolean;
@@ -31,21 +28,21 @@ const BookingModal = ({ open, onOpenChange, room, roomDbId }: BookingModalProps)
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  const tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  const dayAfter = new Date();
-  dayAfter.setDate(dayAfter.getDate() + 2);
+  const tomorrow = addDays(new Date(), 1);
+  const dayAfter = addDays(new Date(), 2);
 
-  const [checkIn, setCheckIn] = useState<Date>(tomorrow);
-  const [checkOut, setCheckOut] = useState<Date>(dayAfter);
+  const [checkIn, setCheckIn] = useState(format(tomorrow, "yyyy-MM-dd"));
+  const [checkOut, setCheckOut] = useState(format(dayAfter, "yyyy-MM-dd"));
   const [guests, setGuests] = useState(1);
   const [guestName, setGuestName] = useState("");
   const [guestEmail, setGuestEmail] = useState(user?.email || "");
   const [guestPhone, setGuestPhone] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const nights = differenceInDays(checkOut, checkIn);
-  const totalPrice = nights > 0 ? nights * room.price : room.price;
+  const nights = Math.max(0, differenceInDays(new Date(checkOut), new Date(checkIn)));
+  const subtotal = nights > 0 ? nights * room.price : room.price;
+  const tax = Math.round(subtotal * 0.18);
+  const totalPrice = subtotal + tax;
 
   const handleBook = async () => {
     if (!user) {
@@ -66,7 +63,6 @@ const BookingModal = ({ open, onOpenChange, room, roomDbId }: BookingModalProps)
 
     setLoading(true);
 
-    // Get room DB id if not provided
     let dbRoomId = roomDbId;
     if (!dbRoomId) {
       const { data: roomData } = await supabase
@@ -78,23 +74,23 @@ const BookingModal = ({ open, onOpenChange, room, roomDbId }: BookingModalProps)
     }
 
     if (!dbRoomId) {
-      toast({ title: "Room not found", variant: "destructive" });
+      toast({ title: "Room not found in database", variant: "destructive" });
       setLoading(false);
       return;
     }
 
-    const { error } = await supabase.from("bookings").insert({
+    const { data, error } = await supabase.from("bookings").insert({
       user_id: user.id,
       room_id: dbRoomId,
-      check_in: format(checkIn, "yyyy-MM-dd"),
-      check_out: format(checkOut, "yyyy-MM-dd"),
+      check_in: checkIn,
+      check_out: checkOut,
       guests,
-      total_price: totalPrice,
+      total_price: subtotal,
       guest_name: guestName.trim(),
       guest_email: guestEmail.trim() || null,
       guest_phone: guestPhone.trim() || null,
       status: "confirmed",
-    });
+    }).select("id").single();
 
     setLoading(false);
 
@@ -103,7 +99,11 @@ const BookingModal = ({ open, onOpenChange, room, roomDbId }: BookingModalProps)
     } else {
       toast({ title: "Booking Confirmed! 🎉", description: `${room.name} for ${nights} night${nights > 1 ? "s" : ""}` });
       onOpenChange(false);
-      navigate("/dashboard");
+      if (data?.id) {
+        navigate(`/invoice/${data.id}`);
+      } else {
+        navigate("/dashboard");
+      }
     }
   };
 
@@ -117,58 +117,32 @@ const BookingModal = ({ open, onOpenChange, room, roomDbId }: BookingModalProps)
         </DialogHeader>
 
         <div className="space-y-4 mt-2">
-          {/* Dates */}
+          {/* Dates - using native inputs to avoid Popover ref issues */}
           <div className="grid grid-cols-2 gap-3">
             <div>
               <Label className="text-xs text-muted-foreground">Check-in</Label>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button variant="outline" className={cn("w-full justify-start text-left font-normal text-sm")}>
-                    <CalendarIcon className="mr-2 h-4 w-4" />
-                    {format(checkIn, "dd MMM yyyy")}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar
-                    mode="single"
-                    selected={checkIn}
-                    onSelect={(d) => {
-                      if (d) {
-                        setCheckIn(d);
-                        if (d >= checkOut) {
-                          const next = new Date(d);
-                          next.setDate(next.getDate() + 1);
-                          setCheckOut(next);
-                        }
-                      }
-                    }}
-                    disabled={(date) => date < new Date()}
-                    initialFocus
-                    className={cn("p-3 pointer-events-auto")}
-                  />
-                </PopoverContent>
-              </Popover>
+              <Input
+                type="date"
+                value={checkIn}
+                min={format(new Date(), "yyyy-MM-dd")}
+                onChange={(e) => {
+                  setCheckIn(e.target.value);
+                  if (e.target.value >= checkOut) {
+                    setCheckOut(format(addDays(new Date(e.target.value), 1), "yyyy-MM-dd"));
+                  }
+                }}
+                className="bg-muted border-border"
+              />
             </div>
             <div>
               <Label className="text-xs text-muted-foreground">Check-out</Label>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button variant="outline" className={cn("w-full justify-start text-left font-normal text-sm")}>
-                    <CalendarIcon className="mr-2 h-4 w-4" />
-                    {format(checkOut, "dd MMM yyyy")}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar
-                    mode="single"
-                    selected={checkOut}
-                    onSelect={(d) => d && setCheckOut(d)}
-                    disabled={(date) => date <= checkIn}
-                    initialFocus
-                    className={cn("p-3 pointer-events-auto")}
-                  />
-                </PopoverContent>
-              </Popover>
+              <Input
+                type="date"
+                value={checkOut}
+                min={checkIn}
+                onChange={(e) => setCheckOut(e.target.value)}
+                className="bg-muted border-border"
+              />
             </div>
           </div>
 
@@ -209,17 +183,17 @@ const BookingModal = ({ open, onOpenChange, room, roomDbId }: BookingModalProps)
           <div className="bg-muted rounded-xl p-4 space-y-2">
             <div className="flex justify-between text-sm text-muted-foreground">
               <span>₹{room.price.toLocaleString()} × {nights > 0 ? nights : 1} night{nights > 1 ? "s" : ""}</span>
-              <span>₹{totalPrice.toLocaleString()}</span>
+              <span>₹{subtotal.toLocaleString()}</span>
             </div>
             <div className="flex justify-between text-sm text-muted-foreground">
-              <span>Taxes & fees (est.)</span>
-              <span>₹{Math.round(totalPrice * 0.18).toLocaleString()}</span>
+              <span>GST (18%)</span>
+              <span>₹{tax.toLocaleString()}</span>
             </div>
             <div className="border-t border-border pt-2 flex justify-between font-semibold text-foreground">
               <span>Total</span>
               <span className="flex items-center gap-1 text-primary font-heading text-lg">
                 <IndianRupee className="w-4 h-4" />
-                {Math.round(totalPrice * 1.18).toLocaleString()}
+                {totalPrice.toLocaleString()}
               </span>
             </div>
           </div>
