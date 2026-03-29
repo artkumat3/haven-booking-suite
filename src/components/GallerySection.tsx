@@ -35,12 +35,8 @@ const GallerySection = () => {
 
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3 max-w-5xl mx-auto">
           {images.map((img, i) => (
-            <motion.div
+            <div
               key={i}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.5 }}
               className={`overflow-hidden rounded-lg ${i === 0 ? "col-span-2 row-span-2" : ""}`}
             >
               <img
@@ -49,7 +45,7 @@ const GallerySection = () => {
                 loading="lazy"
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
               />
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

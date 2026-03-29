@@ -27,58 +27,33 @@ const Signup = () => {
       password,
       options: {
         data: { full_name: fullName.trim() },
-        emailRedirectTo: window.location.origin,
       },
     });
     setLoading(false);
     if (error) {
       toast({ title: "Signup failed", description: error.message, variant: "destructive" });
     } else {
-      toast({ title: "Account created!", description: "Please check your email to verify." });
+      toast({ title: "Account created! 🎉", description: "You can now sign in." });
       navigate("/login");
     }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center pt-16 px-4">
-      <div className="w-full max-w-sm bg-card border border-border rounded p-8">
+      <div className="w-full max-w-sm bg-card border border-border rounded-xl p-8 shadow-sm">
         <h1 className="font-heading text-2xl font-bold text-gold-gradient text-center mb-6">Create Account</h1>
         <form onSubmit={handleSignup} className="space-y-4">
           <div>
             <Label htmlFor="name" className="text-sm text-muted-foreground">Full Name</Label>
-            <Input
-              id="name"
-              value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
-              required
-              className="bg-background border-border"
-              placeholder="John Doe"
-            />
+            <Input id="name" value={fullName} onChange={(e) => setFullName(e.target.value)} required className="bg-background border-border" placeholder="John Doe" />
           </div>
           <div>
             <Label htmlFor="email" className="text-sm text-muted-foreground">Email</Label>
-            <Input
-              id="email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className="bg-background border-border"
-              placeholder="guest@email.com"
-            />
+            <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required className="bg-background border-border" placeholder="guest@email.com" />
           </div>
           <div>
             <Label htmlFor="password" className="text-sm text-muted-foreground">Password</Label>
-            <Input
-              id="password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              minLength={6}
-              className="bg-background border-border"
-              placeholder="••••••••"
-            />
+            <Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required minLength={6} className="bg-background border-border" placeholder="••••••••" />
           </div>
           <Button type="submit" disabled={loading} className="w-full bg-gold-gradient text-primary-foreground hover:opacity-90">
             {loading ? "Creating account..." : "Sign Up"}
