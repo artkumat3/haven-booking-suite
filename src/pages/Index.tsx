@@ -2,6 +2,7 @@ import { Helmet } from "react-helmet-async";
 import HeroSection from "@/components/HeroSection";
 import BookingBar from "@/components/BookingBar";
 import RoomCard from "@/components/RoomCard";
+import GallerySection from "@/components/GallerySection";
 import AmenitiesSection from "@/components/AmenitiesSection";
 import LocationSection from "@/components/LocationSection";
 import { rooms } from "@/data/rooms";
@@ -12,7 +13,7 @@ const Index = () => {
     <>
       <Helmet>
         <title>Hotel Mayur Rajnandgaon — Premium Stay Near Railway Station</title>
-        <meta name="description" content="Book your stay at Hotel Mayur (Aceotel Select), Rajnandgaon. 4 min from Railway Station. Luxury rooms from ₹2,499/night. Free cancellation & breakfast." />
+        <meta name="description" content="Book your stay at Hotel Mayur (Aceotel Select), Rajnandgaon. 4 min from Railway Station. Luxury rooms from ₹2,499/night. Free cancellation & breakfast. Punkh Pure Veg Restaurant on premises." />
       </Helmet>
 
       <HeroSection />
@@ -41,6 +42,7 @@ const Index = () => {
         </div>
       </section>
 
+      <GallerySection />
       <AmenitiesSection />
       <LocationSection />
     </>

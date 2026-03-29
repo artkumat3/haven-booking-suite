@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="bg-surface border-t border-border py-12">
+    <footer className="bg-card border-t border-border py-12">
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-3 gap-8">
           <div>
             <h3 className="font-heading text-xl font-semibold text-gold-gradient mb-4">Hotel Mayur</h3>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Aceotel Select Mayur — Premium hospitality near Rajnandgaon Railway Station. Experience comfort, elegance, and warm Indian hospitality.
+              Aceotel Select Mayur — Premium hospitality near Rajnandgaon Railway Station. Experience comfort, elegance, and warm Indian hospitality. Home to Punkh Pure Veg Family Restaurant.
             </p>
           </div>
 

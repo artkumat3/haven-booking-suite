@@ -1,4 +1,4 @@
-import { MapPin, Train, Clock } from "lucide-react";
+import { MapPin, Train, Clock, Phone } from "lucide-react";
 import { motion } from "framer-motion";
 
 const LocationSection = () => {
@@ -16,7 +16,7 @@ const LocationSection = () => {
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          <div className="bg-card border border-border rounded p-6">
+          <div className="bg-card border border-border rounded-xl p-6">
             <div className="flex items-start gap-3 mb-6">
               <MapPin className="w-5 h-5 text-primary mt-0.5" />
               <div>
@@ -27,7 +27,7 @@ const LocationSection = () => {
               </div>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-4 mb-6">
               {[
                 { name: "Raj Nandgaon Railway Station", distance: "4 min walk" },
                 { name: "Jatkanhar Railway Station", distance: "37.2 km" },
@@ -39,9 +39,13 @@ const LocationSection = () => {
                 </div>
               ))}
             </div>
+
+            <a href="tel:+919752895362" className="flex items-center gap-2 text-sm text-primary hover:underline font-medium">
+              <Phone className="w-4 h-4" /> Call: +91 97528-95362
+            </a>
           </div>
 
-          <div className="bg-card border border-border rounded p-6">
+          <div className="bg-card border border-border rounded-xl p-6">
             <h3 className="font-heading text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
               <Clock className="w-5 h-5 text-primary" />
               Property Rules
@@ -53,6 +57,7 @@ const LocationSection = () => {
               <li>• Groups with only male guests are allowed</li>
               <li>• Accepted IDs: Passport, Aadhaar, Govt. ID, Driving License</li>
               <li>• Pets and outside food not allowed</li>
+              <li>• <span className="text-primary font-medium">Punkh Restaurant</span> — Pure Veg Family Dining on premises</li>
             </ul>
           </div>
         </div>

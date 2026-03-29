@@ -25,7 +25,7 @@ const findAnswer = (query: string): string => {
   if (q.includes("food") || q.includes("outside")) return hotelFAQs[5].a;
   if (q.includes("parking") || q.includes("car")) return hotelFAQs[6].a;
   if (q.includes("age")) return hotelFAQs[7].a;
-  if (q.includes("restaurant") || q.includes("dining")) return hotelFAQs[8].a;
+  if (q.includes("restaurant") || q.includes("dining") || q.includes("punkh")) return "Yes! We have Punkh — a Pure Veg Family Restaurant right on our premises. Enjoy delicious vegetarian cuisine during your stay.";
   if (q.includes("cancel")) return hotelFAQs[9].a;
   if (q.includes("contact") || q.includes("phone") || q.includes("call")) return hotelFAQs[10].a;
   if (q.includes("price") || q.includes("rate") || q.includes("cost")) {
@@ -81,7 +81,7 @@ const ChatBot = () => {
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="fixed bottom-6 right-6 z-50 w-80 sm:w-96 bg-card border border-border rounded shadow-2xl flex flex-col overflow-hidden"
+            className="fixed bottom-6 right-6 z-50 w-80 sm:w-96 bg-card border border-border rounded-xl shadow-2xl flex flex-col overflow-hidden"
             style={{ height: 460 }}
           >
             {/* Header */}
@@ -96,14 +96,14 @@ const ChatBot = () => {
             </div>
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-3">
+            <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-muted/30">
               {messages.map((m, i) => (
                 <div key={i} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
                   <div
-                    className={`max-w-[80%] text-sm px-3 py-2 rounded ${
+                    className={`max-w-[80%] text-sm px-3 py-2 rounded-xl ${
                       m.role === "user"
                         ? "bg-primary text-primary-foreground"
-                        : "bg-secondary text-secondary-foreground"
+                        : "bg-card text-foreground border border-border"
                     }`}
                   >
                     {m.text}
@@ -114,15 +114,15 @@ const ChatBot = () => {
             </div>
 
             {/* Input */}
-            <div className="border-t border-border p-3 flex gap-2">
+            <div className="border-t border-border p-3 flex gap-2 bg-card">
               <input
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && handleSend()}
                 placeholder="Ask about rooms, policies..."
-                className="flex-1 bg-background text-sm text-foreground rounded px-3 py-2 outline-none placeholder:text-muted-foreground font-body"
+                className="flex-1 bg-muted text-sm text-foreground rounded-lg px-3 py-2 outline-none placeholder:text-muted-foreground font-body"
               />
-              <button onClick={handleSend} className="bg-primary text-primary-foreground p-2 rounded hover:opacity-90 transition-opacity">
+              <button onClick={handleSend} className="bg-primary text-primary-foreground p-2 rounded-lg hover:opacity-90 transition-opacity">
                 <Send className="w-4 h-4" />
               </button>
             </div>
